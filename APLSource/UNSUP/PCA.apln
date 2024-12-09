@@ -1,0 +1,10 @@
+:Namespace PCA
+fit←{
+    st←⎕NS⍬ ⋄ n←⍵
+    U S V _←8415⌶⍺-⍤1⊢st.mean←(+⌿⍺)÷≢⍺
+    st.comps←⍉n↑V
+    st
+}
+
+trans←{⍵.comps+.×⍨⍺-⍤1⊢⍵.mean}
+:EndNamespace

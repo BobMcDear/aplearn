@@ -1,0 +1,13 @@
+:Namespace LDA
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺
+    mean_n mean_p←{(+⌿⍵)÷≢⍵}¨X_n X_p←{X⌿⍨y=⍵}¨0 1
+    U S V _←8415⌶⊃+/{(⍉⍵)+.×⍵÷¯1+≢⍵}¨X_n X_p{⍺-⍤1⊢⍵}¨mean_n mean_p
+    st.w←((V+.×(⍉÷S)+.×⍉U))+.×mean_n-mean_p
+    st
+}
+
+pred←{0>⍺+.×⍵.w}
+
+trans←{⍺+.×⍵.w}
+:EndNamespace

@@ -1,0 +1,36 @@
+:Namespace RF
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺ ⋄ st.cls st.n min_per_split feats←⍵
+
+    dt←{
+        grow←{
+            X y←⍵ ⋄ imp←⍺⍺
+            (1=≢∪y)∨min_per_split>≢X: ⍵⍵ y
+
+            gain←{
+                y y_l y_r←⍵
+                (-0=⌊/≢¨y_l y_r)+(imp y)-((imp y_l)×(≢y_l)÷≢y)+((imp y_r)×(≢y_r)÷≢y)
+            }
+            best_split_for_feat←{
+                gains←{gain {y (y/⍨⍵) (y/⍨~⍵)}⍵}⍤1⊢(bounds←∪feat)∘.≥feat←⍵⌷⍉X
+                (⌈/gains) (bounds⌷⍨⊃⍒gains) ⍵
+            }
+
+            _ thresh i←⊃{⍵⌷⍨⊃⍒⍵}best_split_for_feat¨feats?≢⍉X
+            (X_l X_r) (y_l y_r)←(thresh≥i⌷⍉X)∘{(⍺⌿⍵) (⍵⌿⍨~⍺)}¨X y
+            (thresh i) ((⍺⍺ ∇∇ ⍵⍵)X_l y_l) ((⍺⍺ ∇∇ ⍵⍵)X_r y_r)
+        }
+
+        st.cls: ({-+/r×2⍟r←(+⌿⍵∘.=∪⍵)÷⍴⍵} grow {(+⌿⍵∘.=⍳≢∪y)÷≢⍵}) (X⌷⍨⊂⍵) (y⌷⍨⊂⍵)
+                ({{(+⌿⍵)÷≢⍵}2*⍨⍵-⍤1⊢(+⌿⍵)÷≢⍵} grow {(+⌿⍵)÷≢⍵}) (X⌷⍨⊂⍵) (y⌷⍨⊂⍵)
+    }
+
+    st.trees←dt¨↓st.n (≢X)⍴?(st.n×≢X)⍴≢X
+    st
+}
+
+pred←{
+    cls←⍵.cls
+    ⊃⍵.n÷⍨+/⍺∘{⍵∘{cls=≡⍺: ⍺ ⋄ thresh i←⊃⍺ ⋄ ⍵∇⍨⍺⊃⍨2+-thresh≥i⌷⍵}⍤1⊢⍺}¨⍵.trees
+}
+:EndNamespace

@@ -1,0 +1,9 @@
+:Namespace NORM
+fit←{
+    st←⎕NS⍬
+    st.std←0.5*⍨{(+⌿⍵)÷≢⍵}2*⍨⍺-⍤1⊢st.mean←(+⌿⍺)÷≢⍺
+    st
+}
+
+trans←{⍵.std÷⍤1⍨⍺-⍤1⊢⍵.mean}
+:EndNamespace

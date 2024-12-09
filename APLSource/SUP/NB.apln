@@ -1,0 +1,13 @@
+:Namespace NB
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺
+    st.priors←(+⌿y∘.=⍳≢∪y)÷≢y
+    st.stats←↑{⊂⍤1⍉↑({(+⌿⍵)÷¯1+≢⍵}2*⍨⍵-⍤1⊢means) (means←(+⌿⍵)÷≢⍵)}¨{X⌿⍨y=⍵}¨⍳≢∪y
+    st
+}
+
+pred←{
+    pdf←{var mean←⍵ ⋄ (*-(2*⍨⍺-mean)÷0.0001+2×var)÷0.5*⍨0.0001+2×var×○1}
+    ⍵.priors×⍤1⊢⍺×.pdf⍉⍵.stats
+}
+:EndNamespace

@@ -1,0 +1,14 @@
+:Namespace KNN
+fit←{
+    st←⎕NS⍬ ⋄ st.cls st.k←⍵
+    st.X st.y←⍺
+    st
+}
+
+pred←{
+    st←⍵
+    nn←st.y⌷⍨⊂st.k↑⍤1⍋⍤1⊢⍺+.{2*⍨⍺-⍵}⍉st.X
+    st.cls: st.k÷⍨⍉+/nn∘.=⍨⍳≢∪st.y
+            st.k÷⍨+/nn
+}
+:EndNamespace

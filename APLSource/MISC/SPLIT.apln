@@ -1,0 +1,5 @@
+:Namespace SPLIT
+train_val←{(⌈⍵×≢⍺){(⍺↓⍵) (⍺↑⍵)}⍺⌷⍨⊂(≢⍺)?≢⍺}
+
+xy←{(⍉(⊂⍵~⍨⍳≢⍉⍺)⌷⍉⍺) (,⍉⍵⌷⍉⍺)}
+:EndNamespace

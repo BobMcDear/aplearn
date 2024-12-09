@@ -1,0 +1,15 @@
+:Namespace LIN_SVC
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺ ⋄ X←1,X ⋄ y←×y-0.5 ⋄ lr reg←⍵
+
+    upd←{
+        w i←⍵
+        (w-lr×(2×reg×w)-yi×x×1>(yi←i⌷y)×(x←i⌷X)+.×w) ((≢X)|i+1)
+    }
+
+    st.w←⊃upd⍣(1000×≢X)⊢(0⍴⍨≢⍉X) 0
+    st
+}
+
+pred←{0<⍵.w+.×⍨1,⍺}
+:EndNamespace

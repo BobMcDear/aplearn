@@ -1,0 +1,12 @@
+:Namespace ORD
+fit←{
+    st←⎕NS⍬ ⋄ st.inds←,⍵
+    st.cats←⍺∘{∪⍉⍵⌷⍉⍺}¨st.inds
+    st
+}
+
+trans←{
+    st←⍵
+    (⍉(⊂⍸~(⍳≢⍉⍺)∊st.inds)⌷⍉⍺),⍉↑(⍺{(⍵⊃st.cats)⍳⍉(⍵⌷st.inds)⌷⍉⍺}⊢)¨⍳≢st.inds
+}
+:EndNamespace

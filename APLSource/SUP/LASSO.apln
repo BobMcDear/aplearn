@@ -1,0 +1,16 @@
+:Namespace LASSO
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺ ⋄ X←1,X ⋄ reg←⍵
+
+    upd←{
+        w i←⍵
+        rho←(feat+.×y-(X+.×w)-(feat←i⌷⍉X)×i⌷w)÷≢X
+        (((rho+reg××-rho)×reg<|rho)@i⊢w) ((≢w)|i+1)
+    }
+
+    st.w←⊃upd⍣(1000×≢⍉X)⊢(0⍴⍨≢⍉X) 0
+    st
+}
+
+pred←{⍵.w+.×⍨1,⍺}
+:EndNamespace

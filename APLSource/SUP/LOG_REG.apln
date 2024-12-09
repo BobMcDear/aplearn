@@ -1,0 +1,26 @@
+:Namespace LOG_REG
+fit←{
+    st←⎕NS⍬ ⋄ X y←⍺ ⋄ X←1,X ⋄ reg←⍵ ⋄ shp←(≢⍉X) (≢∪y)
+
+    sm←{{⍵÷⍤1⊢⍪+/⍵}{*⍵-⍤1⊢⍪⌈/⍵}X+.×shp⍴⍵}
+    loss←{(reg×⍵+.×⍵)+{(+⌿⍵)÷≢⍵}-⍟(sm ⍵)⌷⍤1⍨⍪y}
+    dloss←{(2×reg×⍵)+,(⍉X)+.×(probs-y∘.=⍳≢⍉probs←sm ⍵)÷×/⍴y}
+    two_loop←{
+        g s z rho←⍵
+        q a _←{q a i←⍵ ⋄ (q-a_i×i⊃z) (a,a_i←(i⌷rho)×q+.×i⊃s) (i-1)}⍣(≢s)⊢g ⍬ (¯1+≢s)
+        -⊃{r i←⍵ ⋄ (r+(i⊃s)×(a⌷⍨(≢s)-i+1)-(i⌷rho)×r+.×i⊃z) (i+1)}⍣(≢s)⊢q 0
+    }
+    upd←{
+        w g d s z rho←⍵
+        m←(-1+7⌊≢s)
+        a←{⍵×0.1}⍣{(loss w+⍵×d)<loss w+0.0001×⍵×g+.×d}⊢1
+        s_new←(w_new←w+a×d)-w ⋄ z_new←(g_new←dloss w_new)-g ⋄ rho_new←÷s_new+.×z_new
+        (w_new) (g_new) (two_loop g_new s z rho) (m↑s,⊂s_new) (m↑z,⊂z_new) (m↑rho,rho_new)
+    }
+
+    st.w←shp⍴⊃upd⍣100⊢(,shp⍴0) (dloss ,shp⍴0) (-dloss ,shp⍴0) ⍬ ⍬ ⍬
+    st
+}
+
+pred←{⍵.w+.×⍨1,⍺}
+:EndNamespace

@@ -1,0 +1,12 @@
+:Namespace ONE_HOT
+fit←{
+    st←⎕NS⍬ ⋄ st.inds←,⍵
+    st.cats←⍺∘{∪⍉⍵⌷⍉⍺}¨st.inds
+    st
+}
+
+trans←{
+    st←⍵
+    (⍉(⊂⍸~(⍳≢⍉⍺)∊st.inds)⌷⍉⍺),⊃,/(⍺{(⍉(⍵⌷st.inds)⌷⍉⍺)∘.≡⍵⊃st.cats}⊢)¨⍳≢st.inds
+}
+:EndNamespace

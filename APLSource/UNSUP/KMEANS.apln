@@ -1,0 +1,15 @@
+:Namespace KMEANS
+fit←{
+    st←⎕NS⍬ ⋄ X←⍺ ⋄ st.k←⍵
+
+    upd←{
+        inds←⊃⍤1⍋⍤1⊢X+.{2*⍨⍺-⍵}⍉⍵
+        {(+⌿⍵)÷≢⍵}∘⊃⍤0⊢{X⌿⍨inds=⍵}¨⍳st.k
+    }
+
+    st.cens←upd⍣300⊢X⌷⍨⊂st.k?≢X
+    st
+}
+
+pred←{⊃⍤1⍋⍤1⊢⍺+.{2*⍨⍺-⍵}⍉⍵.cens}
+:EndNamespace
