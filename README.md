@@ -96,7 +96,7 @@ The metrics, whose left and right arguments are respectively the target and pred
 * ```MISC.METRICS.f1```: F1 score.
 
 
-# Example
+## Example
 
 The example below showcases a short script employing APLearn to conduct binary classification on [the Adult dataset](https://archive.ics.uci.edu/dataset/2/adult). This code is relatively verbose for the sake of explicitness; some of these operations can be composed together for brevity. For instance, the model state could be fed directly to the prediction function, that is, ```out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred X_t y_t SUP.LOG_REG.fit 0.01``` instead of two individual lines for training and prediction.
 
