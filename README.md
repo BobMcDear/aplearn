@@ -1,3 +1,5 @@
+_For a kindred project implementing a deep learning architecture in APL, see_ [trap](https://github.com/BobMcDear/trap).
+
 # APLearn
 
 • **[Introduction](#introduction)**<br>
