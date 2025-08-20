@@ -100,7 +100,7 @@ The metrics, whose left and right arguments are respectively the target and pred
 
 ## Example
 
-The example below showcases a short script employing APLearn to conduct binary classification on [the Adult dataset](https://archive.ics.uci.edu/dataset/2/adult). This code is relatively verbose for the sake of explicitness; some of these operations can be composed together for brevity. For instance, the model state could be fed directly to the prediction function, that is, ```out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred X_t y_t SUP.LOG_REG.fit 0.01``` instead of two individual lines for training and prediction.
+The example below showcases a short script employing APLearn to conduct binary classification on [the Adult dataset](https://www.cs.toronto.edu/~delve/data/adult/adultDetail.html). This code is relatively verbose for the sake of explicitness; some of these operations can be composed together for brevity. For instance, the model state could be fed directly to the prediction function, that is, ```out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred X_t y_t SUP.LOG_REG.fit 0.01``` instead of two individual lines for training and prediction.
 
 ```apl
 ]Import # APLSource
@@ -124,4 +124,4 @@ st←X_t y_t SUP.LOG_REG.fit 0.01
 out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred st
 ⎕←y_v MISC.METRICS.acc out
 ```
-An accuracy of approximately 85% should be reached, which matches the score of the scikit-learn reference.
+An accuracy of approximately 85% should be reached, which matches the score of the scikit-learn baseline. For more details, please refer to the [notebook tutorial](https://github.com/BobMcDear/aplearn/blob/main/examples/adults/apl.ipynb).
