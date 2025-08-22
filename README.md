@@ -124,4 +124,4 @@ st←X_t y_t SUP.LOG_REG.fit 0.01
 out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred st
 ⎕←y_v MISC.METRICS.acc out
 ```
-An accuracy of approximately 85% should be reached, which matches the score of the scikit-learn baseline. For more details, please refer to the [notebook tutorial](https://github.com/BobMcDear/aplearn/blob/main/examples/adults/apl.ipynb).
+The final accuracy should be around 85%, which matches the score of the scikit-learn baseline. For more details, please refer to the accompanying [notebook tutorial](https://github.com/BobMcDear/aplearn/blob/main/examples/adults/apl.ipynb). An additional example dealing with regression can be found [here](https://github.com/BobMcDear/aplearn/tree/main/examples/housing).
