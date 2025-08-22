@@ -53,8 +53,8 @@ This section lists the methods available in APLearn.
 
 ### Supervised
 
-* ```SUP.RIDGE```: Ridge regression using the closed-form SVD-based solution.
-  * Hyperparameters: I) Regularization term
+* ```SUP.RIDGE```: Ridge regression using the closed-form solution.
+  * Hyperparameters: I) Positive regularization term
 * ```SUP.LASSO```: Lasso regression using coordinate descent.
   * Hyperparameters: I) Regularization term
 * ```SUP.LOG_REG```: Logistic regression using L-BFGS.

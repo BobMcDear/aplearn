@@ -1,8 +1,7 @@
 :Namespace RIDGE
 fit←{
     st←⎕NS⍬ ⋄ X y←⍺ ⋄ X←1,X ⋄ reg←⍵
-    U S V _←8415⌶(reg×∘.=⍨⍳≢⍉X)+X+.×⍨⍉X
-    st.w←y+.×⍨(V+.×(⍉÷S)+.×⍉U)+.×⍉X
+    st.w←y+.×⍨(⌹(X+.×⍨⍉X)+reg×∘.=⍨⍳≢⍉X)+.×⍉X
     st
 }
 
