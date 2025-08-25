@@ -10,6 +10,7 @@ _For kindred APL projects, see_ [APLAD](https://github.com/BobMcDear/aplearn) _a
 &nbsp;&nbsp;&nbsp;&nbsp;• <strong>[Unsupervised Methods](#unsupervised-methods)</strong><br>
 &nbsp;&nbsp;&nbsp;&nbsp;• <strong>[Miscellaneous](#miscellaneous)</strong><br>
 • **[Example](#example)**<br>
+• **[Tests](#tests)**<br>
 
 ## Introduction
 
@@ -125,3 +126,7 @@ out←0⌷⍉⍒⍤1⊢X_v SUP.LOG_REG.pred st
 ⎕←y_v MISC.METRICS.acc out
 ```
 The final accuracy should be around 85%, which matches the score of the scikit-learn baseline. For more details, please refer to the accompanying [notebook tutorial](https://github.com/BobMcDear/aplearn/blob/main/examples/adults/apl.ipynb). An additional example dealing with regression can be found [here](https://github.com/BobMcDear/aplearn/tree/main/examples/housing).
+
+## Tests
+
+Writing unit tests for this project isn't straightforward since there are no existing baselines. For now, [`tests`](https://github.com/BobMcDear/aplearn/tree/main/tests) merely trains and evaluates APLearn models on synthetic data so that the final scores may be compared to the Python reference. Please see [here](https://github.com/BobMcDear/aplearn/blob/main/tests/README.md) for more information.
